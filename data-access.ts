@@ -1,9 +1,9 @@
 import { ServiceYear, ServiceType } from './data-types';
-import { IFilter } from './filters/ifilter';
-import { FilterComboPV } from './filters/filter-combopv';
-import { FilterBluRay } from './filters/filter-bluray';
-import { FilterSession } from './filters/filter-session';
-import { FilterEvent } from './filters/filter-event';
+import { IFilter } from './ifilter';
+import { FilterComboPV } from './filter-combopv';
+import { FilterBluRay } from './filter-bluray';
+import { FilterSession } from './filter-session';
+import { FilterEvent } from './filter-event';
 
 export const filtersPriceStandard = () => {
   // standard configuration

@@ -1,6 +1,6 @@
 import { IFilter } from './ifilter';
-import { ServiceYear } from '../data-types';
-import { AppliedService } from '../applied-service';
+import { ServiceYear } from './data-types';
+import { AppliedService } from './applied-service';
 
 export class FilterSession implements IFilter {
 

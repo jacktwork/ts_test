@@ -1,5 +1,5 @@
 import { IFilter } from './ifilter';
-import { AppliedService } from '../applied-service';
+import { AppliedService } from './applied-service';
 
 export class FilterBluRay implements IFilter {
 

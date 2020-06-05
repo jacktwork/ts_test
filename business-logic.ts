@@ -1,6 +1,5 @@
 import { ServiceYear, ServiceType } from './data-types';
 import { GetPrice, filtersPriceStandard, filtersSelectStandard } from './data-access';
-import { AppliedService } from './applied-service';
 
 // note: in angular this would be a service
 // at init it would get a price list from the backend
@@ -20,13 +19,12 @@ export class BusinessLogic {
 
   static determineFinalPrice(selectedServices: ServiceType[], selectedYear: ServiceYear) {
     // apply predicates
-    let appliedServices = selectedServices.map(service => new AppliedService(service));
-    filtersPriceStandard().forEach(filter => appliedServices = filter.apply(appliedServices, selectedYear));
+    filtersPriceStandard().forEach(filter => selectedServices = filter.apply(selectedServices, selectedYear));
 
     // tally price
     let finalPrice: number = 0;
-    appliedServices.filter(service => service.active).forEach(service => {
-      finalPrice += GetPrice(service.type, selectedYear); 
+    selectedServices.forEach(service => {
+      finalPrice += GetPrice(service, selectedYear); 
     });
     return finalPrice;
   }
@@ -45,11 +43,8 @@ export class BusinessLogic {
     }
 
     // apply predicates
-    let appliedServices = selectedServices.map(service => new AppliedService(service));
-    filtersSelectStandard().forEach(filter => appliedServices = filter.apply(appliedServices));
+    filtersSelectStandard().forEach(filter => selectedServices = filter.apply(selectedServices));
 
-    // tally selections
-    selectedServices = appliedServices.filter(service => service.active).map(service => service.type);
     return selectedServices;
   }
 }

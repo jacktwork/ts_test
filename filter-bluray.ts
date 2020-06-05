@@ -1,5 +1,5 @@
 import { IFilter } from './ifilter';
-import { AppliedService } from './applied-service';
+import { ServiceType } from './data-types';
 
 export class FilterBluRay implements IFilter {
 
@@ -9,19 +9,19 @@ export class FilterBluRay implements IFilter {
     this.filterId = 'bluray';
   }
 
-  apply(services: AppliedService[]) {
+  apply(services: ServiceType[]) {
     // qa
     if (!services) {
       return [];
     }
 
-    const foundVideo = services.find(service => service.type === "VideoRecording");
+    const foundVideo = services.find(service => service === "VideoRecording");
     if (!foundVideo) {
       services.map(service => {
         // turn off bluray
-        switch (service.type) {
+        switch (service) {
           case 'BlurayPackage':
-            service.active = false;
+            services = services.filter(service => service !== 'BlurayPackage');
             break;
         }
       });

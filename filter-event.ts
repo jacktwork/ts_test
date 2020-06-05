@@ -1,5 +1,5 @@
 import { IFilter } from './ifilter';
-import { AppliedService } from './applied-service';
+import { ServiceType } from './data-types';
 
 export class FilterEvent implements IFilter {
 
@@ -9,20 +9,20 @@ export class FilterEvent implements IFilter {
     this.filterId = 'event';
   }
 
-  apply(services: AppliedService[]) {
+  apply(services: ServiceType[]) {
     // qa
     if (!services) {
       return [];
     }
 
-    const foundPhoto = services.find(service => service.type === "Photography");
-    const foundVideo = services.find(service => service.type === "VideoRecording");
+    const foundPhoto = services.find(service => service === "Photography");
+    const foundVideo = services.find(service => service === "VideoRecording");
     if (!foundPhoto && !foundVideo) {
       // turn off twoday
       services.map(service => {
-        switch (service.type) {
+        switch (service) {
           case 'TwoDayEvent':
-            service.active = false;
+            services = services.filter(service => service !== 'TwoDayEvent');
             break;
         }
       });

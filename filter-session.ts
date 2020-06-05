@@ -1,6 +1,5 @@
 import { IFilter } from './ifilter';
-import { ServiceYear } from './data-types';
-import { AppliedService } from './applied-service';
+import { ServiceYear, ServiceType } from './data-types';
 
 export class FilterSession implements IFilter {
 
@@ -10,30 +9,31 @@ export class FilterSession implements IFilter {
     this.filterId = 'session';
   }
 
-  apply(services: AppliedService[], year: ServiceYear) {
+  apply(services: ServiceType[], year: ServiceYear) {
     // qa
     if (!services) {
       return [];
     }
 
-    const foundPhoto = services.find(service => service.type === "Photography");
-    const foundVideo = services.find(service => service.type === "VideoRecording");
-    const foundSession = services.find(service => service.type === "WeddingSession");
+    let foundPhoto = services.find(service => service === "Photography");
+    let foundVideo = services.find(service => service === "VideoRecording");
+    const foundSession = services.find(service => service === "WeddingSession");
+    const foundCombo = services.find(service => service === "ComboPhotoVideo");
 
-    if (foundSession && (foundPhoto || foundVideo)) {
+    if (foundSession && (foundPhoto || foundVideo || foundCombo)) {
       // turn off session
       services.map(service => {
-        switch(service.type) {
+        switch(service) {
           case 'WeddingSession':
-            service.active = false;
+            services = services.filter(service => service !== 'WeddingSession');
             break;
         }
       });
 
-      if (foundPhoto && year === 2022) {
+      if ((foundPhoto || foundCombo) && year === 2022) {
         // freebie
       } else {
-        services.push(new AppliedService('SessionBundle'));
+        services.push('SessionBundle');
       }
     }
 

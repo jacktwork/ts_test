@@ -1,7 +1,6 @@
-import { ServiceYear } from './data-types';
-import { AppliedService } from './applied-service';
+import { ServiceType, ServiceYear } from './data-types';
 
 export interface IFilter {
-  apply(services: AppliedService[], year?: ServiceYear): AppliedService[];
+  apply(services: ServiceType[], year?: ServiceYear): ServiceType[];
 }
 

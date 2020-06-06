@@ -7,7 +7,7 @@ import { FilterEvent } from './filter-event';
 
 export const filtersPriceStandard = () => {
   // standard configuration
-  // customer may wish to override 
+  // customer may wish to override CMS?
   const list: IFilter[] = [];
   list.push(new FilterComboPV());
   list.push(new FilterBluRay());
@@ -17,9 +17,12 @@ export const filtersPriceStandard = () => {
 };
 
 export const filtersSelectStandard = () => {
-  // standard configuration
-  // customer may wish to override 
+  // work around 
+  // filtersSelect needs to be different than filtersPrice
+  // addition of ServiceType "SessionBundle"
+  // breaks unit tests
   const list: IFilter[] = [];
+  list.push(new FilterComboPV());
   list.push(new FilterBluRay());
   list.push(new FilterEvent());
   return list;

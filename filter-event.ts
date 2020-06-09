@@ -19,13 +19,7 @@ export class FilterEvent implements IFilter {
     const foundVideo = services.find(service => service === "VideoRecording");
     if (!foundPhoto && !foundVideo) {
       // turn off twoday
-      services.map(service => {
-        switch (service) {
-          case 'TwoDayEvent':
-            services = services.filter(service => service !== 'TwoDayEvent');
-            break;
-        }
-      });
+      services = services.filter(service => service !== 'TwoDayEvent');
     }
 
     return services;

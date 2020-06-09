@@ -17,14 +17,8 @@ export class FilterBluRay implements IFilter {
 
     const foundVideo = services.find(service => service === "VideoRecording");
     if (!foundVideo) {
-      services.map(service => {
-        // turn off bluray
-        switch (service) {
-          case 'BlurayPackage':
-            services = services.filter(service => service !== 'BlurayPackage');
-            break;
-        }
-      });
+      // turn off bluray
+      services = services.filter(service => service !== 'BlurayPackage');
     }
 
     return services;

@@ -20,16 +20,8 @@ export class FilterComboPV implements IFilter {
 
     if (foundPhoto && foundVideo) {
       // turn off photo and video
-      services.map(service => {
-        switch (service) {
-          case 'Photography':
-            services = services.filter(service => service !== 'Photography');
-            break;
-          case 'VideoRecording':
-            services = services.filter(service => service !== 'VideoRecording');
-            break;
-        }
-      });
+      services = services.filter(service => service !== 'Photography');
+      services = services.filter(service => service !== 'VideoRecording');
 
       // add combination
       services.push('ComboPhotoVideo');

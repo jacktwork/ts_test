@@ -23,13 +23,7 @@ export class FilterSession implements IFilter {
       const foundVideo = services.find(service => service === "VideoRecording");
       if (foundPhoto || foundVideo || foundCombo) {
         // turn off session
-        services.map(service => {
-          switch (service) {
-            case 'WeddingSession':
-              services = services.filter(service => service !== 'WeddingSession');
-              break;
-          }
-        });
+        services = services.filter(service => service !== 'WeddingSession');
 
         if ((foundPhoto || foundCombo) && year === 2022) {
           // freebie
